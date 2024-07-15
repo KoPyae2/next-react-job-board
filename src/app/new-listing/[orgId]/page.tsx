@@ -1,5 +1,5 @@
 import { getUser } from "@workos-inc/authkit-nextjs"
-import { WorkOS } from "@workos-inc/node"
+import { OrganizationMembership, WorkOS } from "@workos-inc/node"
 import '@radix-ui/themes/styles.css';
 import JobForm from "@/app/components/JobForm";
 
@@ -9,6 +9,8 @@ type PageProps = {
         orgId: string
     }
 }
+
+
 
 export default async function NewListingPageForOrganization(props: PageProps) {
     const { user } = await getUser()
@@ -26,3 +28,18 @@ export default async function NewListingPageForOrganization(props: PageProps) {
         <JobForm orgId={orgId} />
     )
 }
+
+// export async function generateStaticParams() {
+//     const { user } = await getUser();
+//     const workos = new WorkOS(process.env.WORKOS_API_KEY);
+
+//     const organizationMemberships = await workos.userManagement.listOrganizationMemberships({
+//         userId: user?.id,
+//     });
+
+//     const activeOrganizationMemberships: OrganizationMembership[] = organizationMemberships.data.filter(om => om.status === 'active');
+
+//     return activeOrganizationMemberships.map((membership) => ({
+//         params: { orgId: membership.organizationId },
+//     }));
+// }

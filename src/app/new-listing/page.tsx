@@ -1,6 +1,5 @@
 import { getUser } from "@workos-inc/authkit-nextjs"
 import { WorkOS } from "@workos-inc/node";
-import createCompany from "../action/workosAction";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -20,7 +19,6 @@ export default async function NewListingPage() {
 
     const organizationMemberships = await workos.userManagement.listOrganizationMemberships({
         userId: user?.id,
-
     })
 
 
@@ -44,7 +42,7 @@ export default async function NewListingPage() {
                             Object.keys(organizationsNames).map(orgId => (
                                 <Link
                                     href={"/new-listing/" + orgId}
-                                    className="flex gap-2 items-center py-2 px-4 border-b last:border-b-0">
+                                    className="flex gap-2 items-center py-2 px-4 border-b last:border-b-0" key={orgId}>
                                     {organizationsNames[orgId]}
                                     <FontAwesomeIcon className="h-4" icon={faArrowRight} />
                                 </Link>

@@ -1,23 +1,23 @@
 'use client';
 import TimeAgo from "@/app/components/TimeAgo";
-import {Job, JobModel} from "@/models/Job";
-import {faHeart} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { Job, JobModel } from "@/models/Job";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import Link from "next/link";
+import Image from 'next/image';
 
-export default function JobRow({jobDoc}:{jobDoc:Job}) {
+export default function JobRow({ jobDoc }: { jobDoc: Job }) {
   return (
-    <>
-      <div className="bg-white p-4 rounded-lg shadow-sm relative">
+      <div className="bg-white p-4 rounded-lg shadow-sm relative" >
         <div className="absolute cursor-pointer top-4 right-4">
           <FontAwesomeIcon className="size-4 text-gray-300" icon={faHeart} />
         </div>
         <div className="flex grow gap-4">
           <div className="content-center w-12 basis-12 shrink-0">
-            <img
+            <Image
               className="size-12"
-              src={jobDoc?.jobIcon} alt=""/>
+              src={jobDoc?.jobIcon} alt="icon" />
           </div>
           <div className="grow sm:flex">
             <div className="grow">
@@ -25,7 +25,7 @@ export default function JobRow({jobDoc}:{jobDoc:Job}) {
                 <Link href={`/jobs/${jobDoc.orgId}`} className="hover:underline text-gray-500 text-sm">{jobDoc.orgName || '?'}</Link>
               </div>
               <div className="font-bold text-lg mb-1">
-                <Link className="hover:underline" href={'/show/'+jobDoc._id}>{jobDoc.title}</Link>
+                <Link className="hover:underline" href={'/show/' + jobDoc._id}>{jobDoc.title}</Link>
               </div>
               <div className="text-gray-400 text-sm capitalize">
                 {jobDoc.remote}
@@ -36,13 +36,13 @@ export default function JobRow({jobDoc}:{jobDoc:Job}) {
                 {jobDoc.isAdmin && (
                   <>
                     {' '}&middot;{' '}
-                    <Link href={'/jobs/edit/'+jobDoc._id} className="text-blue-600">Edit</Link>
+                    <Link href={'/jobs/edit/' + jobDoc._id} className="text-blue-600">Edit</Link>
                     {' '}&middot;{' '}
                     <button
                       type="button"
                       className="text-red-500"
                       onClick={async () => {
-                        await axios.delete('/api/jobs?id='+jobDoc._id);
+                        await axios.delete('/api/jobs?id=' + jobDoc._id);
                         window.location.reload();
                       }}>
                       Delete
@@ -59,6 +59,5 @@ export default function JobRow({jobDoc}:{jobDoc:Job}) {
           </div>
         </div>
       </div>
-    </>
   );
 }
