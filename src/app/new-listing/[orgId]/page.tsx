@@ -10,7 +10,20 @@ type PageProps = {
     }
 }
 
+// export async function generateStaticParams() {
+//     // const { user } = await getUser();
+//     const workos = new WorkOS(process.env.WORKOS_API_KEY);
 
+//     const organizationMemberships = await workos.userManagement.listOrganizationMemberships({
+//         userId: 'user_01J2JKJJDV80SYSBH7GVVX05EK',
+//     });
+
+//     const activeOrganizationMemberships: OrganizationMembership[] = organizationMemberships.data.filter(om => om.status === 'active');
+
+//     return activeOrganizationMemberships.map((membership) => ({
+//         params: { orgId: membership.organizationId },
+//     }));
+// }
 
 export default async function NewListingPageForOrganization(props: PageProps) {
     const { user } = await getUser()
@@ -29,17 +42,4 @@ export default async function NewListingPageForOrganization(props: PageProps) {
     )
 }
 
-// export async function generateStaticParams() {
-//     const { user } = await getUser();
-//     const workos = new WorkOS(process.env.WORKOS_API_KEY);
 
-//     const organizationMemberships = await workos.userManagement.listOrganizationMemberships({
-//         userId: user?.id,
-//     });
-
-//     const activeOrganizationMemberships: OrganizationMembership[] = organizationMemberships.data.filter(om => om.status === 'active');
-
-//     return activeOrganizationMemberships.map((membership) => ({
-//         params: { orgId: membership.organizationId },
-//     }));
-// }

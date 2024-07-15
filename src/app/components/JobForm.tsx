@@ -17,6 +17,8 @@ import {
 } from "react-country-state-city";
 
 export default function JobForm({ orgId, jobDoc }: { orgId: string; jobDoc?: Job }) {
+  console.log('job form');
+  
   const [countryId, setCountryId] = useState(jobDoc?.countryId || 0);
   const [stateId, setStateId] = useState(jobDoc?.stateId || 0);
   const [cityId, setCityId] = useState(jobDoc?.cityId || 0);

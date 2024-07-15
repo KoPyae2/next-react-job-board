@@ -12,6 +12,7 @@ export default async function Home() {
     await JobModel.find({},{},{limit:5,sort:'-createdAt'}),
     user,
   );
+  
   return (
     <>
       <Hero />
