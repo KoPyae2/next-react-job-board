@@ -10,22 +10,23 @@ type PageProps = {
     }
 }
 
-// export async function generateStaticParams() {
-//     // const { user } = await getUser();
-//     const workos = new WorkOS(process.env.WORKOS_API_KEY);
+export async function generateStaticParams() {
+    const { user } = await getUser();
+    const workos = new WorkOS(process.env.WORKOS_API_KEY);
 
-//     const organizationMemberships = await workos.userManagement.listOrganizationMemberships({
-//         userId: 'user_01J2JKJJDV80SYSBH7GVVX05EK',
-//     });
+    const organizationMemberships = await workos.userManagement.listOrganizationMemberships({
+        userId: user?.id,
+    });
 
-//     const activeOrganizationMemberships: OrganizationMembership[] = organizationMemberships.data.filter(om => om.status === 'active');
+    const activeOrganizationMemberships: OrganizationMembership[] = organizationMemberships.data.filter(om => om.status === 'active');
 
-//     return activeOrganizationMemberships.map((membership) => ({
-//         params: { orgId: membership.organizationId },
-//     }));
-// }
+    return activeOrganizationMemberships.map((membership) => ({
+        params: { orgId: membership.organizationId },
+    }));
+}
 
 export default async function NewListingPageForOrganization(props: PageProps) {
+    console.log(props.params.orgId);
     const { user } = await getUser()
     const workos = new WorkOS(process.env.WORKOS_API_KEY);
     if (!user) return 'Please Login!';
